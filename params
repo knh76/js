@@ -4,26 +4,40 @@ location 에서 파라미터를 정규화 window 이하 오브젝트에 params �
 */
 
 urlParam = function(){
-			this.params = {};
-			var self = this;
-			var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, 
-        function (m,key,value) { 
-          self.params[key] = value 
-        });
-			
-			this.get = function (param) {
-				if(this.params[param]) {
-					return this.params[param];
-				} else {
-					return undefined;
-				}	
-			};
-			
-			this.getDecoded = function (param) {
-				if(this.get(param)) {
-					decodeURIComponent(this.get(param));
-				} else {
-					return "";
-				}
-			};
+	this.params = {};
+	var self = this;
+	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, 
+		function (m,key,value) { 
+		self.params[key] = value 
+	});
+
+	this.get = function (param) {
+		if(this.params[param]) {
+			return this.params[param];
+		} else {
+			return undefined;
+		}	
+	};
+
+	this.getDecoded = function (param) {
+		if(this.get(param)) {
+			decodeURIComponent(this.get(param));
+		} else {
+			return "";
+		}
+	};
 }	
+
+/*
+function getUrlVars(){
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++){
+		hash = hashes[i].split('=');
+		vars.push(hash[0]);
+		vars[hash[0]] = hash[1];
+    }
+    return vars;
+}		
+getUrlVars();
+*/
