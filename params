@@ -1,0 +1,29 @@
+/*
+- function -> urlParam()
+location 에서 파라미터를 정규화 window 이하 오브젝트에 params 배열을 추가 
+*/
+
+urlParam = function(){
+			this.params = {};
+			var self = this;
+			var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, 
+        function (m,key,value) { 
+          self.params[key] = value 
+        });
+			
+			this.get = function (param) {
+				if(this.params[param]) {
+					return this.params[param];
+				} else {
+					return undefined;
+				}	
+			};
+			
+			this.getDecoded = function (param) {
+				if(this.get(param)) {
+					decodeURIComponent(this.get(param));
+				} else {
+					return "";
+				}
+			};
+}	
